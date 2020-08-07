@@ -1,0 +1,14 @@
+{
+    "name" :"Keep" ,
+    "short_name" : "Keep",
+    "start_url" : "./index.html" ,
+    "background_color": "#fff" , 
+    "theme_color" : "#009578" ,
+    "display" : "standalone",
+    "icons" : [
+        {
+            "src": "images/logo.png",
+            "sizes" :  "256x256"  
+        }
+    ]
+}

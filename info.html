@@ -1,0 +1,80 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+      <script src="js/jquery.js"></script>
+
+    <script src="app.js"></script>
+</head>
+<style>
+    
+      h5{
+          font-weight: bold;
+      }
+
+      #tempnotice{
+          justify-content: center;
+          position: absolute;
+          left: 50%;
+          top: 30%;
+          transform: translate(-50%, -50%)
+ 
+      }
+</style>
+<body>
+
+ 
+<div style=" padding-top: 5px; padding-right:5px; background-color: rgb(63, 166, 226);">
+    <a href="#" data-target="slide-out" style="color: black;" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+</div>
+
+
+  <ul id="slide-out" class="sidenav">
+    <li><div class="user-view">
+      <div class="background">
+        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.yqvxUn23c8XfvFCyh1vteAHaFj%26pid%3DApi&f=1">
+      </div>
+       
+      <a  ><span class="white-text email">Keep</span></a>
+    </div></li>
+    <li><a class="waves-effect" href="#!"><i class="material-icons">cloud</i>external link</a></li>
+     
+    <li><a  class="waves-effect" href="other.html"><i class="material-icons">chrome_reader_mode
+    </i>my notes</a></li>
+
+    <li><a  class="waves-effect" href="info.html"><i class="material-icons">info
+
+    </i>know more</a></li>
+    
+  </ul>
+  
+ 
+    
+    <div id="tempnotice"  >
+        
+        <h5 class="center-align" style="justify-content:space-between;"> 
+        Keep is an offline progressive web app. It totally runs offline on your machine / phone.     
+        </h5>
+    </div>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.sidenav');
+            var instances = M.Sidenav.init(elems, options);
+          });
+         
+        
+          $(document).ready(function(){
+            $('.sidenav').sidenav();
+          });
+        </script>
+    </body>
+</body>
+</html>

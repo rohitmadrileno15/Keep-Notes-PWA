@@ -1,0 +1,516 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+      <script src="js/jquery.js"></script>
+
+
+</head>
+<style>
+  .redclass{
+    color: red;
+  }
+    #centraldiv{
+  
+       
+        display: none;
+        margin-top: 6%;
+        padding: 50px;
+ 
+       
+
+    }
+     
+    .adddiv{
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            bottom: 50px;
+            width: 20%;
+            right: 10px;
+            float: right;
+            color: white;
+            text-align: center;
+          
+    }
+
+    #disableinputbutton{
+        display: none;
+    }
+
+    .card-panel{
+
+        box-shadow: none;
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    #snackbar {
+        visibility: hidden;
+        min-width: 250px;
+        margin-left: -125px;
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        border-radius: 2px;
+        padding: 10px;
+        position: fixed;
+        z-index: 1;
+        left: 50%;
+        bottom: 30px;
+    
+        font-size: 16px;
+      }
+      
+      #snackbar.show {
+        visibility: visible;
+        -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        animation: fadein 0.5s, fadeout 0.5s 2.5s;
+      }
+      
+      @-webkit-keyframes fadein {
+        from {bottom: 0; opacity: 0;} 
+        to {bottom: 30px; opacity: 1;}
+      }
+      
+      @keyframes fadein {
+        from {bottom: 0; opacity: 0;}
+        to {bottom: 30px; opacity: 1;}
+      }
+      
+      @-webkit-keyframes fadeout {
+        from {bottom: 30px; opacity: 1;} 
+        to {bottom: 0; opacity: 0;}
+      }
+      
+      @keyframes fadeout {
+        from {bottom: 30px; opacity: 1;}
+        to {bottom: 0; opacity: 0;}
+      }
+
+      h5{
+          font-weight: bold;
+      }
+
+       
+</style>
+<body>
+
+ 
+<div style=" padding-top: 5px; padding-right:5px; background-color: rgb(63, 166, 226);">
+    <a href="#" data-target="slide-out" style="color: black;" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+</div>
+
+
+  <ul id="slide-out" class="sidenav">
+    <li><div class="user-view">
+      <div class="background">
+        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.yqvxUn23c8XfvFCyh1vteAHaFj%26pid%3DApi&f=1">
+      </div>
+       
+      <a  ><span class="white-text email">Keep</span></a>
+    </div></li>
+    <li><a class="waves-effect" href="#!"><i class="material-icons">whatshot</i>external link</a></li>
+     
+    <li><a  class="waves-effect" href="other.html"><i class="material-icons">chrome_reader_mode
+    </i>my notes</a></li>
+
+    <li><a  class="waves-effect" href="info.html"><i class="material-icons">info
+
+    </i>know more</a></li>
+
+    <li><a  class="waves-effect" onclick="deleteall()"><i class="material-icons">delete
+    </i>delete all</a></li>
+
+    
+  </ul>
+
+
+
+  <div class="container" id="notesfield">
+
+    <ul id="notelist" class="collapsible popout">
+ 
+    </ul>
+
+  </div>
+
+        
+  
+
+    
+    <div class="adddiv">
+        <a id="showinputbutton" class="btn-floating btn-large waves-effect waves-light  black"><i class="material-icons">add</i></a>
+         <a id="disableinputbutton" class="btn-floating btn-large waves-effect waves-light scale-transition scale-in black"><i class="material-icons">delete</i></a>
+    </div>
+    
+    <div id="centraldiv" >
+    
+        <div class="col s12 m12 l6">
+            <div class="card-panel">
+              <h5 class="center-align">Add your note</h5>
+              
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input required id="name4" type="text" class="validate" placeholder="Enter a title">                
+                    </div>
+                </div>
+             
+              <div class="row">
+                <div class="input-field col s12">
+                    <textarea required id="icon_prefix2" class="materialize-textarea" cols="30" rows="6" placeholder="Enter a body text"></textarea>  
+                </div>
+            </div>
+
+              <div class="row">
+   
+                <div class="input-field col s12">
+                    <button id="submitnote" class="btn cyan waves-effect waves-light right" type="submit" name="action">Submit
+                        <i class="material-icons right">add_task</i>
+                      </button>
+                </div>
+                </div>
+                </div>
+        
+            </div>
+             
+          </div>
+        
+          <div id="snackbar">Note has been added</div>
+
+ 
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script>
+      
+      document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.collapsible');
+        var instances = M.Collapsible.init(elems, options);
+      });
+    
+      // Or with jQuery
+    
+      $(document).ready(function(){
+        $('.collapsible').collapsible();
+      });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.sidenav');
+            var instances = M.Sidenav.init(elems, options);
+          });
+         
+        
+          $(document).ready(function(){
+            $('.sidenav').sidenav();
+          });
+        function firetoast( ) {
+         
+            var x = document.getElementById("snackbar");
+            x.className = "show";
+            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+         
+        }
+
+
+         function showinputbar() {
+            document.getElementById("centraldiv").style.display= "block";
+            document.getElementById("disableinputbutton").style.display= "block";
+            document.getElementById("showinputbutton").style.display= "none"; 
+            document.getElementById("notesfield").style.display= "none";        
+         }
+         function  disableinputbar() {
+            document.getElementById("centraldiv").style.display= "none";
+            document.getElementById("disableinputbutton").style.display= "none";
+            document.getElementById("showinputbutton").style.display= "block";
+            document.getElementById("notesfield").style.display= "block";         
+         }
+
+        
+         
+         document.getElementById("showinputbutton").onclick = showinputbar;
+
+         document.getElementById("disableinputbutton").onclick = disableinputbar;
+         
+          
+    </script>
+
+    <script>
+      var result_array = [] ;
+
+      document.getElementById("submitnote").onclick = putdata  ;
+
+      
+      //idvalue , title , message
+      function putdata() {
+
+        window.indexedDB = window.indexedDB || window.mozIndexedDb || window.webkitIndexedDB || window.msIndexedDB ;
+
+      if(!window.indexedDB) {
+          alert("Sorry to say, the application is not supported, please contact the developer");
+      }
+
+      let request = window.indexedDB.open("Notes" , 2) , 
+          db,
+          tx ,
+          store ,
+          index ;
+
+     
+
+      request.onerror = e => {
+          console.log("ERROR " , e);
+      }
+      
+      
+
+      request.onsuccess = e => {
+
+          db = request.result;
+          console.log(db);
+          tx = db.transaction("Notes" , "readwrite");
+          store = tx.objectStore("Notes") ;
+          index = store.index("Title");
+
+          val1 = document.getElementById("name4").value ;
+          val2 = document.getElementById("icon_prefix2").value ;
+
+          if( !val1 || !val2) {
+            alert("Please enter text into designated input fields");
+            return
+          }
+          firetoast()
+
+          console.log("Added new note")
+
+          store.add(
+            { id : Math.floor((Math.random() * 100000) + 1) , Title: val1 , Body: val2 }
+        );
+        myFunction(1000)
+
+          db.onerror = e => {
+              console.log("error, please provide permission! " , e);
+          }
+
+      tx.oncomplete = e => {
+          db.close()
+      }
+      }
+  }
+
+  function deleteall() {
+    window.indexedDB = window.indexedDB || window.mozIndexedDb || window.webkitIndexedDB || window.msIndexedDB ;
+  
+    if(!window.indexedDB) {
+        alert("Sorry to say, the application is not supported, please contact the developer");
+    }
+    var Keyvalueofdata = Keyvalueofdata;
+    
+    let request = window.indexedDB.open("Notes" , 2) , 
+        db,
+        tx ,
+        store ,
+        index ;
+  
+     
+  
+        request.onerror = e => {
+            console.log("ERROR " , e);
+        }
+        
+        
+  
+        request.onsuccess = (e ) => {
+  
+            db = request.result;
+        
+            tx = db.transaction("Notes" , "readwrite");
+            store = tx.objectStore("Notes") ;
+            index = store.index("Title");
+
+            store.clear()
+            myFunction(30)
+            };        
+
+        tx.oncomplete = e => {
+            db.close()
+        }
+        }
+
+
+  
+
+
+  function deletedata(Keyvalueofdata) {
+    window.indexedDB = window.indexedDB || window.mozIndexedDb || window.webkitIndexedDB || window.msIndexedDB ;
+  
+    if(!window.indexedDB) {
+        alert("Sorry to say, the application is not supported, please contact the developer");
+    }
+    var Keyvalueofdata = Keyvalueofdata;
+    
+    let request = window.indexedDB.open("Notes" , 2) , 
+        db,
+        tx ,
+        store ,
+        index ;
+  
+     
+  
+        request.onerror = e => {
+            console.log("ERROR " , e);
+        }
+        
+        
+  
+        request.onsuccess = (e ) => {
+  
+            db = request.result;
+            console.log(db);
+            tx = db.transaction("Notes" , "readwrite");
+            store = tx.objectStore("Notes") ;
+            index = store.index("Title");
+
+            console.log(Keyvalueofdata)
+   
+            var objectStoreRequest = store.delete(Number(Keyvalueofdata))
+
+            objectStoreRequest.onsuccess = function(event) {
+              // report the success of our request
+             console.log("Deleted")
+             myFunction(30)
+            };        
+
+        tx.oncomplete = e => {
+            db.close()
+        }
+        }
+
+        
+    }
+  
+
+
+  window.indexedDB = window.indexedDB || window.mozIndexedDb || window.webkitIndexedDB || window.msIndexedDB ;
+
+  if(!window.indexedDB) {
+      alert("Sorry to say, the application is not supported, please contact the developer");
+  }
+  
+  let request = window.indexedDB.open("Notes" , 2) , 
+      db,
+      tx ,
+      store ,
+      index ;
+  
+      request.onupgradeneeded = e =>{
+          let db = request.result ,
+          store = db.createObjectStore("Notes" , {keyPath: 'id'}) ,
+
+          index = store.createIndex("Title" , "Title" , {unique:false});
+  
+      }
+  
+      request.onerror = e => {
+          console.log("ERROR " , e);
+      }
+      
+      
+  
+      request.onsuccess = e => {
+  
+          db = request.result;
+          console.log(db);
+          tx = db.transaction("Notes" , "readwrite");
+          store = tx.objectStore("Notes") ;
+      
+
+
+          let q1 = store.getAll();
+          q1.onsuccess = function() {
+            
+            result_array= result_array.concat(q1.result);
+            
+           
+            for (let index = 0; index < result_array.length; index++) {
+              console.log(result_array[index])
+              
+              var linode = document.createElement("LI");  
+              var divnode1 = document.createElement("div");
+              divnode1.classList.add("collapsible-header");
+              var icontag = document.createElement("i");
+              icontag.classList.add("material-icons");
+              var textnode1 = document.createTextNode("book");
+              icontag.appendChild(textnode1);
+              divnode1.appendChild(icontag);
+              var text_1 = document.createTextNode(result_array[index].Title);
+              divnode1.appendChild(text_1);
+              var divnode2 = document.createElement("div");
+              divnode2.classList.add("collapsible-body");
+
+              var linktag = document.createElement("a");
+              linktag.setAttribute("id",  result_array[index].id );
+              var temppo = "deletedata(" + result_array[index].id + ")"
+              linktag.setAttribute("onClick",  temppo );
+
+              var icontag2 = document.createElement("i");
+              icontag2.classList.add("material-icons");
+              icontag2.classList.add("redclass");
+              var textnode10 = document.createTextNode("delete");
+              icontag2.appendChild(textnode10);
+              linktag.appendChild(icontag2);
+
+              var row_div = document.createElement("div");
+              row_div.classList.add("row");
+
+              var row_div_off = document.createElement("div");
+              row_div_off.classList.add("col");
+              row_div_off.classList.add("s6");
+              row_div_off.classList.add("offset-s11");
+              row_div_off.appendChild(linktag);
+
+              row_div.appendChild(row_div_off);
+            
+              var spantag = document.createElement("span");
+              var spantext = document.createTextNode(result_array[index].Body);
+              spantag.appendChild(spantext);
+              divnode2.appendChild(spantag);
+  
+
+              divnode2.appendChild(row_div);
+    
+
+              linode.appendChild(divnode1);
+              linode.appendChild(divnode2);
+              document.getElementById("notelist").appendChild(linode);
+              
+          }
+        }
+           
+            db.onerror = e => {
+              console.log("error, please provide permission! " , e);
+          }
+  
+      tx.oncomplete = e => {
+          db.close()
+      }
+      }
+
+      function myFunction(time_) {
+        setTimeout(function(){ window.location.href="other.html"; }, time_);
+      }
+
+ 
+
+    </script>
+
+   
+
+    </body>
+</body>
+</html>
