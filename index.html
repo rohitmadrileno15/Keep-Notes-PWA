@@ -3,9 +3,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#009578"> 
- 
+    <link rel="icon" href="images/logo.png">
     <link rel="manifest" href="manifest.json">
-    <title>Document</title>
+    <title>Keep</title>
     <link rel="apple-touch-icon"  href="images/logo.png">
      
 </head>
@@ -16,6 +16,8 @@
 
         <h1>Rohit Saha</h1>
         <a href="other.html"> Keep!</a>
+        <br>
+        <button class="add-button">Add to home screen</button>
     </div>
 
     <script>
@@ -30,6 +32,37 @@
                 console.log(err);
             })
         }
+
+        let deferredPrompt;
+const addBtn = document.querySelector('.add-button');
+addBtn.style.display = 'none';
+
+
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  addBtn.style.display = 'block';
+  addBtn.addEventListener('click', (e) => {
+    addBtn.style.display = 'none';
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === 'accepted') {
+
+
+          console.log('User accepted the A2HS prompt');
+
+
+        } else {
+
+          console.log('User dismissed the A2HS prompt');
+
+        }
+        deferredPrompt = null;
+      });
+  });
+});
+
 
     </script>
     
