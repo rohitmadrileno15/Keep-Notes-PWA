@@ -7,17 +7,43 @@
     <link rel="manifest" href="manifest.json">
     <title>Keep</title>
     <link rel="apple-touch-icon"  href="images/logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
      
 </head>
+
+<style>
+
+  .add-button{
+    padding: 6px;
+    border-radius: 10px;
+    border: 2px solid black;
+  }
+  .heading{
+    display: none;
+  }
+  
+ </style>
 <body>
 
 
-    <div class="central">
+    <div class="container">
 
-        <h1>Rohit Saha</h1>
-        <a href="other.html"> Keep!</a>
+        <h1>keep</h1>
+        <p>Keep notes the right way!</p>
+        <a href="other.html"></a>
         <br>
         <button class="add-button">Add to home screen</button>
+        <br>
+        <br>
+        <div class="progress">
+          <div class="indeterminate"></div>
+        </div>
+        <br>
+        <a class="heading" href="other.html">Start using Keep</a>
+
     </div>
 
     <script>
@@ -37,12 +63,38 @@
 
 let deferredPrompt;
 const addBtn = document.querySelector('.add-button');
-
+const tagbar = document.querySelector('.heading');
  
 console.log("Activated")
 
 
 
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+ 
+  addBtn.style.display = 'block';
+  addBtn.addEventListener('click', (e) => {
+    addBtn.style.display = 'none';
+    tagbar.style.display = 'block';
+
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === 'accepted') {
+
+
+          console.log('User accepted the A2HS prompt');
+
+
+        } else {
+
+          console.log('User dismissed the A2HS prompt');
+
+        }
+        deferredPrompt = null;
+      });
+  });
+});
 
 
     </script>
